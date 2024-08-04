@@ -4,6 +4,7 @@ import com.nagoorkhan.inventoryservice.model.InventoryVO;
 import com.nagoorkhan.inventoryservice.repository.InventoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -13,7 +14,8 @@ public class InventoryService {
 
     private final InventoryRepository inventoryRepository;
 
-    public List<InventoryVO> isProductInStock(String skuCode) {
-        return inventoryRepository.findBySkuCode(skuCode);
+    @Transactional(readOnly = true)
+    public List<InventoryVO> getProductsStock(List<String> skuCodes) {
+        return inventoryRepository.findBySkuCodeIn(skuCodes);
     }
 }
