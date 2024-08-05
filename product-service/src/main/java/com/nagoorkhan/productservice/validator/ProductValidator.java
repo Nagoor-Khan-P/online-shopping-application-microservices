@@ -9,7 +9,7 @@ public class ProductValidator {
 
     public void validateProductId(String productId) {
         if (productId.isEmpty()) {
-            throw new ProductExceptionHandler("Product Id is missing");
+            throw new ProductExceptionHandler("Product Id is missing", 500);
         }
     }
 

@@ -19,7 +19,7 @@ public class InventoryController {
     private final InventoryResponseMapper inventoryResponseMapper;
     @GetMapping
     public ResponseEntity<List<InventoryResponseVO>> getProductsStock(
-            @RequestParam(value = "skuCode") List<String> skuCodes
+            @RequestParam(value = "skuCodes") List<String> skuCodes
     ) {
         List<InventoryVO> inventoryVOS = inventoryService.getProductsStock(skuCodes);
         return ResponseEntity.ok(inventoryVOS.stream().map(inventoryResponseMapper::toInventoryResponseVO).toList());

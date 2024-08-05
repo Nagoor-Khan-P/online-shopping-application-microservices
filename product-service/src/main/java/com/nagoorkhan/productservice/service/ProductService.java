@@ -35,7 +35,7 @@ public class ProductService {
         productValidator.validateProductId(productId);
         ProductVO productVO = productRepository.findById(productId).orElse(null);
         if(productVO == null) {
-            throw new ProductExceptionHandler("Product is not available in the inventory");
+            throw new ProductExceptionHandler("Product is not available in the inventory", 500);
         }
         log.info("Product is fetched successfully for the given product id {}", productId);
         return productVO;
