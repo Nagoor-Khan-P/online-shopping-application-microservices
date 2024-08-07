@@ -23,13 +23,13 @@ import java.util.Objects;
 public class OrderService {
 
     private final OrderRepository orderRepository;
-    private final WebClient webClient;
+    private final WebClient.Builder webClientBuilder;
 
     public OrderVO createOrder(OrderVO orderVO) {
         log.debug("In create order");
         List<String> skuCodes = orderVO.getOrderLineItemVOS().stream().map(OrderLineItemsVO::getSkuCode).toList();
         InventoryResponseVO[] inventoryResponseVOS =
-                webClient.get().uri("http://localhost:8082/api/inventory",
+                webClientBuilder.build().get().uri("http://inventory-service/api/inventory",
                                 uriBuilder -> uriBuilder.queryParam("skuCodes", skuCodes).build())
                 .retrieve()
                 .bodyToMono(InventoryResponseVO[].class)
