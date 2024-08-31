@@ -14,5 +14,6 @@ public class OrderResponseVO {
     private Long oid;
     private String orderNum;
     private List<OrderLineItemsResponseVO> orderLineItems;
+    private String message;
 
 }
